@@ -21,431 +21,253 @@ flowchart
 
 program
 
-#include<iostream>
-
-#include<string>
-
-#include<limits>
-
+#include <iostream>
+#include <string>
 using namespace std;
 
 struct Node {
-
-string name;
-
-int accNo;
-
-string type;
-
-double balance;
-
-Node* next;
-
-Node* prev;
-
+    string name;
+    int accNo;
+    string type;
+    double balance;
+    Node* next;
+    Node* prev;
 };
 
 Node* head = NULL;
-
 Node* tail = NULL;
 
-Node* searchAccount(int no) 
-{
+Node* searchAccount(int no) {
+    Node* temp = head;
 
-Node* temp = head;
+    while (temp != NULL) {
+        if (temp->accNo == no)
+            return temp;
 
-while (temp != NULL)
-{
+        temp = temp->next;
+    }
 
-    if (temp->accNo == no)
-        return temp;
-
-    temp = temp->next;
+    return NULL;
 }
 
-return NULL;
-
-}
-
-void addAccount() 
-{
-
-int no;
-
-string name, type;
-
-double balance;
-
-cout << "Enter Account Number: ";
-
-
-cin >> no;
-
-if (searchAccount(no) != NULL)
-{
-
-    cout << "Account number already exists!\n";
-    return;
-}
-
-cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-
-cout << "Enter Account Holder Name: ";
-
-getline(cin, name);
-
-cout << "Enter Account Type: ";
-
-getline(cin, type);
-
-cout << "Enter Initial Balance: ";
-
-if (!(cin >> balance) || balance < 0) {
-
-    cout << "Invalid balance!\n";
-    
-    cin.clear();
-    
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
-
-Node* newNode = new Node;
-
-newNode->name = name;
-
-newNode->accNo = no;
-
-newNode->type = type;
-
-newNode->balance = balance;
-
-newNode->next = NULL;
-
-newNode->prev = tail;
-
-if (head == NULL) {
-
-    head = tail = newNode;
-}
-
-else {
-
-    tail->next = newNode;
-    
-    tail = newNode;
-}
-
-cout << "Account created successfully!\n";
-
-}
-
-void displayForward() {
-
-if (head == NULL) {
-
-cout << "No accounts available.\n";
-
-return;
-
-}
-
-Node* temp = head;
-
-cout << " ";
-
-while (temp != NULL) {
-
-    cout << "Name: " << temp->name
-         << "\nAccount Number: " << temp->accNo
-         << "\nAccount Type: " << temp->type
-         << "\nBalance: " << temp->balance
-         << "\n-------------------------\n";
-
-    temp = temp->next;
-}
-
-}
-
-void displayBackward() 
-
-{
-
-if (tail == NULL) {
-
-cout << "No accounts available.\n";
-
-return;
-
-}
-
-Node* temp = tail;
-
-cout << " ";
-
-while (temp != NULL)
-{
-
-    cout << "Name: " << temp->name
-    
-         << "\nAccount Number: " << temp->accNo
-         
-         << "\nAccount Type: " << temp->type
-         
-         << "\nBalance: " << temp->balance
-         
-         << "\n-------------------------\n";
-
-    temp = temp->prev;
-}
-
-}
-
-void searchAndDisplay() {
-
-int no;
-
-cout << "Enter Account Number to Search: ";
-
-cin >> no;
-
-Node* temp = searchAccount(no);
-
-if (temp == NULL)
-{
-
-    cout << "Account not found!\n";
-    return;
-}
-
-cout << "\nAccount Found!\n";
-
-cout << "Name: " << temp->name
-
-     << "\nAccount Number: " << temp->accNo
-     << "\nAccount Type: " << temp->type
-     << "\nBalance: " << temp->balance << "\n";
-
+void createAccount() {
+    Node* n = new Node;
+
+    cout << "Enter Account Holder Name: ";
+    cin >> ws;
+    getline(cin, n->name);
+
+    cout << "Enter Account Number: ";
+    cin >> n->accNo;
+
+    if (searchAccount(n->accNo) != NULL) {
+        cout << "Account number already exists!\n";
+        delete n;
+        return;
+    }
+
+    cout << "Enter Account Type: ";
+    cin >> ws;
+    getline(cin, n->type);
+
+    cout << "Enter Initial Balance: ";
+    cin >> n->balance;
+
+    if (n->balance < 0) {
+        cout << "Invalid balance!\n";
+        delete n;
+        return;
+    }
+
+    n->next = NULL;
+    n->prev = tail;
+
+    if (head == NULL)
+        head = tail = n;
+    else {
+        tail->next = n;
+        tail = n;
+    }
+
+    cout << "Account created successfully!\n";
 }
 
 void depositMoney() {
+    int no;
+    double amount;
 
-int no;
+    cout << "Enter Account Number: ";
+    cin >> no;
 
-double amount;
+    Node* temp = searchAccount(no);
 
-cout << "Enter Account Number: ";
+    if (temp == NULL) {
+        cout << "Account not found!\n";
+        return;
+    }
 
-cin >> no;
+    cout << "Enter Deposit Amount: ";
+    cin >> amount;
 
-Node* temp = searchAccount(no);
+    if (amount <= 0) {
+        cout << "Invalid amount!\n";
+        return;
+    }
 
-if (temp == NULL) {
-
-    cout << "Account not found!\n";
-    return;
+    temp->balance += amount;
+    cout << "Deposit successful!\n";
+    cout << "Balance: " << temp->balance << "\n";
 }
 
-cout << "Enter Deposit Amount: ";
+void withdrawMoney() {
+    int no;
+    double amount;
 
-if (!(cin >> amount) || amount <= 0) 
-{
+    cout << "Enter Account Number: ";
+    cin >> no;
 
-    cout << "Invalid deposit amount!\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
+    Node* temp = searchAccount(no);
+
+    if (temp == NULL) {
+        cout << "Account not found!\n";
+        return;
+    }
+
+    cout << "Enter Withdrawal Amount: ";
+    cin >> amount;
+
+    if (amount <= 0) {
+        cout << "Invalid amount!\n";
+        return;
+    }
+
+    if (amount > temp->balance) {
+        cout << "Insufficient balance!\n";
+        return;
+    }
+
+    temp->balance -= amount;
+    cout << "Withdrawal successful!\n";
+    cout << "Balance: " << temp->balance << "\n";
 }
 
-temp->balance += amount;
+void checkBalance() {
+    int no;
 
-cout << "Deposit successful!\n";
+    cout << "Enter Account Number: ";
+    cin >> no;
 
-cout << "Updated Balance: " << temp->balance << "\n";
+    Node* temp = searchAccount(no);
 
+    if (temp == NULL)
+        cout << "Account not found!\n";
+    else
+        cout << "Account Holder: " << temp->name
+             << "\nBalance: " << temp->balance << "\n";
 }
 
-void withdrawMoney()
-{
+void deleteAccount() {
+    int no;
 
-int no;
+    cout << "Enter Account Number: ";
+    cin >> no;
 
-double amount;
+    Node* temp = searchAccount(no);
 
-cout << "Enter Account Number: ";
+    if (temp == NULL) {
+        cout << "Account not found!\n";
+        return;
+    }
 
-cin >> no;
+    if (temp->prev != NULL)
+        temp->prev->next = temp->next;
+    else
+        head = temp->next;
 
-Node* temp = searchAccount(no);
+    if (temp->next != NULL)
+        temp->next->prev = temp->prev;
+    else
+        tail = temp->prev;
 
-if (temp == NULL) 
-{
-
-    cout << "Account not found!\n";
-    return;
-}
-
-cout << "Enter Withdrawal Amount: ";
-
-if (!(cin >> amount) || amount <= 0)
-
-{
-    cout << "Invalid withdrawal amount!\n";
-    
-    cin.clear();
-    
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    
-    return;
-}
-
-if (amount > temp->balance)
-{
-
-    cout << "Insufficient balance!\n";
-    
-    return;
-}
-
-temp->balance -= amount;
-
-cout << "Withdrawal successful!\n";
-
-cout << "Remaining Balance: " << temp->balance << "\n";
-
-}
-
-void deleteAccount()
-
-{
-
-int no;
-
-cout << "Enter Account Number to Delete: ";
-
-cin >> no;
-
-Node* temp = searchAccount(no);
-
-if (temp == NULL)
-{
-
-    cout << "Account not found!\n";
-    return;
-}
-
-if (temp->prev != NULL)
-
-    temp->prev->next = temp->next;
-else
-
-    head = temp->next;
-
-if (temp->next != NULL)
-
-    temp->next->prev = temp->prev;
-else
-
-    tail = temp->prev;
-
-delete temp;
-
-cout << "Account deleted successfully!\n";
-
-}
-
-void freeMemory()
-{
-
-Node* temp = head;
-
-while (temp != NULL) 
-
-{
-
-    Node* nextNode = temp->next;
     delete temp;
-    temp = nextNode;
+    cout << "Account deleted successfully!\n";
 }
 
-head = tail = NULL;
+void displayForward() {
+    Node* temp = head;
 
-}
-
-int main()
-{
-
-int choice;
-
-do
-
-{
-    cout << " ";
-    cout << "1. Add Account\n";
-    
-    cout << "2. Display Accounts Forward\n";
-    cout << "3. Display Accounts Backward\n";
-    cout << "4. Search Account\n";
-    cout << "5. Deposit Money\n";
-    cout << "6. Withdraw Money\n";
-    cout << "7. Delete Account\n";
-    cout << "8. Exit\n";
-    cout << "Enter Your Choice: ";
-
-    if (!(cin >> choice)) {
-        cout << "Invalid input! Please enter a number.\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        continue;
+    if (temp == NULL) {
+        cout << "No accounts available.\n";
+        return;
     }
 
-    switch (choice) {
-        case 1:
-            addAccount();
-            break;
+    while (temp != NULL) {
+        cout << "\nName: " << temp->name
+             << "\nAccount Number: " << temp->accNo
+             << "\nAccount Type: " << temp->type
+             << "\nBalance: " << temp->balance << "\n";
 
-        case 2:
-            displayForward();
-            break;
-
-        case 3:
-            displayBackward();
-            break;
-
-        case 4:
-            searchAndDisplay();
-            break;
-
-        case 5:
-            depositMoney();
-            break;
-
-        case 6:
-            withdrawMoney();
-            break;
-
-        case 7:
-            deleteAccount();
-            break;
-
-        case 8:
-            freeMemory();
-            cout << "Thank you for using the system!\n";
-            break;
-
-        default:
-            cout << "Invalid choice! Try again.\n";
+        temp = temp->next;
     }
-
-} 
-
-while (choice != 8);
-
-return 0;
-
 }
 
+void displayReverse() {
+    Node* temp = tail;
+
+    if (temp == NULL) {
+        cout << "No accounts available.\n";
+        return;
+    }
+
+    while (temp != NULL) {
+        cout << "\nName: " << temp->name
+             << "\nAccount Number: " << temp->accNo
+             << "\nAccount Type: " << temp->type
+             << "\nBalance: " << temp->balance << "\n";
+
+        temp = temp->prev;
+    }
+}
+
+int main() {
+    int choice;
+
+    do {
+        cout << "\n--- BANK ACCOUNT MANAGEMENT ---\n";
+        cout << "1. Create Account\n";
+        cout << "2. Deposit Money\n";
+        cout << "3. Withdraw Money\n";
+        cout << "4. Check Balance\n";
+        cout << "5. Delete Account\n";
+        cout << "6. Display All Accounts\n";
+        cout << "7. Display Accounts in Reverse\n";
+        cout << "8. Exit\n";
+        cout << "Enter Choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: createAccount(); break;
+            case 2: depositMoney(); break;
+            case 3: withdrawMoney(); break;
+            case 4: checkBalance(); break;
+            case 5: deleteAccount(); break;
+            case 6: displayForward(); break;
+            case 7: displayReverse(); break;
+            case 8: cout << "Exiting program.\n"; break;
+            default: cout << "Invalid choice!\n";
+        }
+
+    } while (choice != 8);
+
+    while (head != NULL) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    tail = NULL;
+    return 0;
+}
 output
 <img width="1429" height="682" alt="WhatsApp Image 2026-10-10 at 8 50 09 PM" src="https://github.com/user-attachments/assets/6f9b18d8-86e6-481d-ac37-a47a5837bd09" />
 
