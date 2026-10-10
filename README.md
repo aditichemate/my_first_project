@@ -21,11 +21,11 @@ flowchart
 
 program
 
-#include <iostream>
+#include<iostream>
 
-#include <string>
+#include<string>
 
-#include <limits>
+#include<limits>
 
 using namespace std;
 
@@ -90,6 +90,7 @@ if (searchAccount(no) != NULL)
 
 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+
 cout << "Enter Account Holder Name: ";
 
 getline(cin, name);
@@ -103,7 +104,9 @@ cout << "Enter Initial Balance: ";
 if (!(cin >> balance) || balance < 0) {
 
     cout << "Invalid balance!\n";
+    
     cin.clear();
+    
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     return;
 }
@@ -126,9 +129,11 @@ if (head == NULL) {
 
     head = tail = newNode;
 }
+
 else {
 
     tail->next = newNode;
+    
     tail = newNode;
 }
 
@@ -164,6 +169,7 @@ while (temp != NULL) {
 }
 
 void displayBackward() 
+
 {
 
 if (tail == NULL) {
@@ -182,9 +188,13 @@ while (temp != NULL)
 {
 
     cout << "Name: " << temp->name
+    
          << "\nAccount Number: " << temp->accNo
+         
          << "\nAccount Type: " << temp->type
+         
          << "\nBalance: " << temp->balance
+         
          << "\n-------------------------\n";
 
     temp = temp->prev;
@@ -277,12 +287,16 @@ if (temp == NULL)
 }
 
 cout << "Enter Withdrawal Amount: ";
+
 if (!(cin >> amount) || amount <= 0)
+
 {
     cout << "Invalid withdrawal amount!\n";
     
     cin.clear();
+    
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
     return;
 }
 
@@ -290,6 +304,7 @@ if (amount > temp->balance)
 {
 
     cout << "Insufficient balance!\n";
+    
     return;
 }
 
@@ -302,6 +317,7 @@ cout << "Remaining Balance: " << temp->balance << "\n";
 }
 
 void deleteAccount()
+
 {
 
 int no;
@@ -323,6 +339,7 @@ if (temp->prev != NULL)
 
     temp->prev->next = temp->next;
 else
+
     head = temp->next;
 
 if (temp->next != NULL)
@@ -344,6 +361,7 @@ void freeMemory()
 Node* temp = head;
 
 while (temp != NULL) 
+
 {
 
     Node* nextNode = temp->next;
@@ -361,6 +379,7 @@ int main()
 int choice;
 
 do
+
 {
     cout << " ";
     cout << "1. Add Account\n";
@@ -420,6 +439,7 @@ do
     }
 
 } 
+
 while (choice != 8);
 
 return 0;
