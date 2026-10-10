@@ -20,6 +20,7 @@ flowchart
 <img width="1312" height="1199" alt="WhatsApp Image 2026-10-10 at 9 22 23 PM" src="https://github.com/user-attachments/assets/eb625536-63c3-440e-ab53-bc5cbb70e9da" />
 
 program
+
 #include <iostream>
 #include <string>
 #include <limits>
@@ -346,6 +347,4 @@ Thus, the project helps in understanding the practical use of data structures in
 
 
 
-
-11. To demonstrate the practical application of a doubly linked list.
 
