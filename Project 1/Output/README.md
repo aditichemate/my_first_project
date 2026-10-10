@@ -1,72 +1,82 @@
 # OUTPUT
-
-## Title
-
-Bank Account Management System Using Doubly Linked List
-
-## Sample Output
-
 --- BANK ACCOUNT MANAGEMENT ---
 
-1. Add Account
-2. Display Accounts
-3. Search Account
-4. Deposit Money
-5. Withdraw Money
-6. Delete Account
-7. Exit
+1. Create Account
+2. Deposit Money
+3. Withdraw Money
+4. Check Balance
+5. Delete Account
+6. Display All Accounts
+7. Display Accounts in Reverse
+8. Exit
+   Enter Choice: 1
 
-Enter Choice: 1
+Enter Account Holder Name: Aditi
 Enter Account Number: 101
-Enter Account Holder Name: Rahul Patil
-Enter Balance: 5000
-Account Added Successfully!
+Enter Account Type: Savings
+Enter Initial Balance: 5000
+Account created successfully!
 
 --- BANK ACCOUNT MANAGEMENT ---
 
-1. Add Account
-2. Display Accounts
-3. Search Account
-4. Deposit Money
-5. Withdraw Money
-6. Delete Account
-7. Exit
+1. Create Account
+2. Deposit Money
+3. Withdraw Money
+4. Check Balance
+5. Delete Account
+6. Display All Accounts
+7. Display Accounts in Reverse
+8. Exit
+   Enter Choice: 2
 
-Enter Choice: 2
-
-Account Number: 101
-Name: Rahul Patil
-Balance: 5000
-
---- BANK ACCOUNT MANAGEMENT ---
-Enter Choice: 3
 Enter Account Number: 101
-Account Found!
-Name: Rahul Patil
-Balance: 5000
+Enter Deposit Amount: 2000
+Deposit successful!
+Balance: 7000
 
 --- BANK ACCOUNT MANAGEMENT ---
-Enter Choice: 4
+
+1. Create Account
+2. Deposit Money
+3. Withdraw Money
+4. Check Balance
+5. Delete Account
+6. Display All Accounts
+7. Display Accounts in Reverse
+8. Exit
+   Enter Choice: 3
+
 Enter Account Number: 101
-Enter Deposit Amount: 1000
-Updated Balance: 6000
+Enter Withdrawal Amount: 1000
+Withdrawal successful!
+Balance: 6000
 
 --- BANK ACCOUNT MANAGEMENT ---
-Enter Choice: 5
+
+1. Create Account
+2. Deposit Money
+3. Withdraw Money
+4. Check Balance
+5. Delete Account
+6. Display All Accounts
+7. Display Accounts in Reverse
+8. Exit
+   Enter Choice: 4
+
 Enter Account Number: 101
-Enter Withdrawal Amount: 500
-Remaining Balance: 5500
+Account Holder: Aditi
+Balance: 6000
 
 --- BANK ACCOUNT MANAGEMENT ---
-Enter Choice: 6
-Enter Account Number to Delete: 101
-Account Deleted Successfully!
 
---- BANK ACCOUNT MANAGEMENT ---
-Enter Choice: 7
-Thank You!
+1. Create Account
+2. Deposit Money
+3. Withdraw Money
+4. Check Balance
+5. Delete Account
+6. Display All Accounts
+7. Display Accounts in Reverse
+8. Exit
+   Enter Choice: 8
 
-## Result
-
-The Bank Account Management System successfully performs account operations using a doubly linked list in C++.
-
+Exiting program.
