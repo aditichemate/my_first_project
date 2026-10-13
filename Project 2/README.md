@@ -27,8 +27,7 @@ To develop a C++ program that constructs a Binary Search Tree (BST) and an AVL t
 12. Release dynamically allocated memory.
 13. Stop the program.
 ## 5.Flowchart
-
-
+<img width="854" height="1281" alt="WhatsApp Image 2026-10-13 at 7 40 35 AM" src="https://github.com/user-attachments/assets/723452d5-028e-4d9b-8698-67f21175cda6" />
 
 ## 6. program
 #include <iostream>
