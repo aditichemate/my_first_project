@@ -1,8 +1,8 @@
-lesson no.3-linked list 
+## lesson no.3-linked list 
 
-Bank Account Management System Using Stack and Queue with Dynamic Implementation   
+## Bank Account Management System Using Stack and Queue with Dynamic Implementation   
 
-1.Problem Statement
+## 1.Problem Statement
 The project aims to manage banking-related records using Stack and Queue. The Stack follows the Last In, First Out (LIFO) principle, while the Queue follows the First In, First Out (FIFO) principle.
 Dynamic memory allocation is used to create and delete nodes at runtime, allowing the data structures to grow and shrink according to the number of records stored.
 
@@ -24,7 +24,7 @@ Operations:
 -Display
 -The Queue follows the FIFO principle.
 
-3.OBJECTIVES
+## 3.OBJECTIVES
 -To develop a Bank Account Management System using the C++ programming language.
 -To modify the original doubly linked list implementation by introducing Stack and Queue.
 -To implement Stack using dynamically allocated linked nodes.
@@ -76,15 +76,15 @@ Algorithm 2: Queue Using Dynamic Implementation
 10.Delete all remaining nodes.
 11.Stop.
 
-6.
+## 6.
 
-7.program
-
-
-8.output
+## 7.program
 
 
-9.CONCLUSION
+## 8.output
+
+
+## 9.CONCLUSION
 The Bank Account Management System using Stack and Queue with Dynamic Implementation was developed using C++. The project demonstrates how linked nodes and dynamic memory allocation can be used to manage banking-related records.
 The Stack implements the LIFO principle and supports push, pop, peek, and display operations. The Queue implements the FIFO principle and supports enqueue, dequeue, front, and display operations.
 Through this project, the concepts of pointers, linked nodes, dynamic memory allocation, insertion, deletion, and memory deallocation are demonstrated. The project also illustrates how different data structures can be selected according to the requirements of a problem.
