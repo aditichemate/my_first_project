@@ -1,342 +1,264 @@
 #include <iostream>
-#include <string>
-#include <limits>
+#include <algorithm>
 using namespace std;
 
-// Node representing a bank account
-struct Node {
-string name;
-int accNo;
-string type;
-double balance;
-Node* next;
-Node* prev;
+// Node structure for the Binary Search Tree
+struct BSTNode {
+int data;
+BSTNode* left;
+BSTNode* right;
+
+```
+BSTNode(int value) {
+    data = value;
+    left = right = nullptr;
+}
+```
+
 };
 
-// Head pointer refers to the first node
-Node* head = nullptr;
-
-// Search for an account by account number
-Node* searchAccount(int number) {
-Node* temp = head;
+// Insert a value into the BST
+BSTNode* insertBST(BSTNode* root, int value) {
+if (root == nullptr)
+return new BSTNode(value);
 
 ```
-while (temp != nullptr) {
-    if (temp->accNo == number)
-        return temp;
+if (value < root->data)
+    root->left = insertBST(root->left, value);
+else if (value > root->data)
+    root->right = insertBST(root->right, value);
 
-    temp = temp->next;
-}
-
-return nullptr;
+return root;
 ```
 
 }
 
-// Add a new account
-void addAccount() {
-int number;
-string name, type;
-double balance;
+// Calculate BST height
+int heightBST(BSTNode* root) {
+if (root == nullptr)
+return 0;
 
 ```
-cout << "Enter account number: ";
-
-if (!(cin >> number) || number <= 0) {
-    cout << "Invalid account number.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
-
-if (searchAccount(number) != nullptr) {
-    cout << "Account number already exists.\n";
-    return;
-}
-
-cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-cout << "Enter account holder name: ";
-getline(cin, name);
-
-if (name.empty()) {
-    cout << "Name cannot be empty.\n";
-    return;
-}
-
-cout << "Enter account type: ";
-getline(cin, type);
-
-if (type.empty()) {
-    cout << "Account type cannot be empty.\n";
-    return;
-}
-
-cout << "Enter initial balance: ";
-
-if (!(cin >> balance) || balance < 0) {
-    cout << "Invalid balance.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
-
-Node* newNode = new Node{
-    name, number, type, balance, nullptr, nullptr
-};
-
-// Insert at the end of the doubly linked list
-if (head == nullptr) {
-    head = newNode;
-} else {
-    Node* temp = head;
-
-    while (temp->next != nullptr)
-        temp = temp->next;
-
-    temp->next = newNode;
-    newNode->prev = temp;
-}
-
-cout << "Account created successfully.\n";
+return 1 + max(heightBST(root->left),
+               heightBST(root->right));
 ```
 
 }
 
-// Display all accounts
-void displayAccounts() {
-if (head == nullptr) {
-cout << "No accounts available.\n";
+// Display BST inorder traversal
+void inorderBST(BSTNode* root) {
+if (root == nullptr)
 return;
-}
 
 ```
-Node* temp = head;
-
-cout << "\n--- Bank Account Records ---\n";
-
-while (temp != nullptr) {
-    cout << "Account Number: " << temp->accNo << '\n';
-    cout << "Holder Name: " << temp->name << '\n';
-    cout << "Account Type: " << temp->type << '\n';
-    cout << "Balance: " << temp->balance << '\n';
-    cout << "----------------------------\n";
-
-    temp = temp->next;
-}
+inorderBST(root->left);
+cout << root->data << " ";
+inorderBST(root->right);
 ```
 
 }
 
-// Search and display an account
-void findAccount() {
-int number;
+// Node structure for the AVL Tree
+struct AVLNode {
+int data;
+AVLNode* left;
+AVLNode* right;
+int height;
 
 ```
-cout << "Enter account number to search: ";
-
-if (!(cin >> number)) {
-    cout << "Invalid account number.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
-
-Node* account = searchAccount(number);
-
-if (account == nullptr) {
-    cout << "Account not found.\n";
-} else {
-    cout << "Account Number: " << account->accNo << '\n';
-    cout << "Holder Name: " << account->name << '\n';
-    cout << "Account Type: " << account->type << '\n';
-    cout << "Balance: " << account->balance << '\n';
+AVLNode(int value) {
+    data = value;
+    left = right = nullptr;
+    height = 1;
 }
 ```
 
+};
+
+// Return the height of an AVL node
+int heightAVL(AVLNode* node) {
+return node == nullptr ? 0 : node->height;
 }
 
-// Deposit money into an account
-void depositMoney() {
-int number;
-double amount;
+// Calculate the balance factor
+int getBalance(AVLNode* node) {
+if (node == nullptr)
+return 0;
 
 ```
-cout << "Enter account number: ";
-
-if (!(cin >> number)) {
-    cout << "Invalid account number.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
-
-Node* account = searchAccount(number);
-
-if (account == nullptr) {
-    cout << "Account not found.\n";
-    return;
-}
-
-cout << "Enter deposit amount: ";
-
-if (!(cin >> amount) || amount <= 0) {
-    cout << "Deposit amount must be positive.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
-
-account->balance += amount;
-
-cout << "Deposit successful. New balance: "
-     << account->balance << '\n';
+return heightAVL(node->left) -
+       heightAVL(node->right);
 ```
 
 }
 
-// Withdraw money from an account
-void withdrawMoney() {
-int number;
-double amount;
+// Perform a right rotation (LL case)
+AVLNode* rightRotate(AVLNode* y) {
+AVLNode* x = y->left;
+AVLNode* temp = x->right;
 
 ```
-cout << "Enter account number: ";
+x->right = y;
+y->left = temp;
 
-if (!(cin >> number)) {
-    cout << "Invalid account number.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
+y->height = 1 + max(heightAVL(y->left),
+                    heightAVL(y->right));
 
-Node* account = searchAccount(number);
+x->height = 1 + max(heightAVL(x->left),
+                    heightAVL(x->right));
 
-if (account == nullptr) {
-    cout << "Account not found.\n";
-    return;
-}
-
-cout << "Enter withdrawal amount: ";
-
-if (!(cin >> amount) || amount <= 0) {
-    cout << "Withdrawal amount must be positive.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
-}
-
-if (amount > account->balance) {
-    cout << "Insufficient balance.\n";
-    return;
-}
-
-account->balance -= amount;
-
-cout << "Withdrawal successful. New balance: "
-     << account->balance << '\n';
+return x;
 ```
 
 }
 
-// Delete an account
-void deleteAccount() {
-int number;
+// Perform a left rotation (RR case)
+AVLNode* leftRotate(AVLNode* x) {
+AVLNode* y = x->right;
+AVLNode* temp = y->left;
 
 ```
-cout << "Enter account number to delete: ";
+y->left = x;
+x->right = temp;
 
-if (!(cin >> number)) {
-    cout << "Invalid account number.\n";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return;
+x->height = 1 + max(heightAVL(x->left),
+                    heightAVL(x->right));
+
+y->height = 1 + max(heightAVL(y->left),
+                    heightAVL(y->right));
+
+return y;
+```
+
 }
 
-Node* temp = searchAccount(number);
+// Insert a value into the AVL Tree
+AVLNode* insertAVL(AVLNode* node, int value) {
+if (node == nullptr)
+return new AVLNode(value);
 
-if (temp == nullptr) {
-    cout << "Account not found.\n";
-    return;
-}
-
-// Update previous node or head
-if (temp->prev != nullptr)
-    temp->prev->next = temp->next;
+```
+// Perform normal BST insertion
+if (value < node->data)
+    node->left = insertAVL(node->left, value);
+else if (value > node->data)
+    node->right = insertAVL(node->right, value);
 else
-    head = temp->next;
+    return node; // Ignore duplicate values
 
-// Update next node's previous pointer
-if (temp->next != nullptr)
-    temp->next->prev = temp->prev;
+// Update node height
+node->height = 1 + max(heightAVL(node->left),
+                       heightAVL(node->right));
 
-delete temp;
+// Calculate balance factor
+int balance = getBalance(node);
 
-cout << "Account deleted successfully.\n";
+// LL case
+if (balance > 1 && value < node->left->data)
+    return rightRotate(node);
+
+// RR case
+if (balance < -1 && value > node->right->data)
+    return leftRotate(node);
+
+// LR case
+if (balance > 1 && value > node->left->data) {
+    node->left = leftRotate(node->left);
+    return rightRotate(node);
+}
+
+// RL case
+if (balance < -1 && value < node->right->data) {
+    node->right = rightRotate(node->right);
+    return leftRotate(node);
+}
+
+return node;
 ```
 
 }
 
-// Free allocated memory
-void freeList() {
-while (head != nullptr) {
-Node* temp = head;
-head = head->next;
-delete temp;
+// Display AVL inorder traversal
+void inorderAVL(AVLNode* root) {
+if (root == nullptr)
+return;
+
+```
+inorderAVL(root->left);
+cout << root->data << " ";
+inorderAVL(root->right);
+```
+
 }
+
+// Free BST memory
+void freeBST(BSTNode* root) {
+if (root == nullptr)
+return;
+
+```
+freeBST(root->left);
+freeBST(root->right);
+delete root;
+```
+
+}
+
+// Free AVL memory
+void freeAVL(AVLNode* root) {
+if (root == nullptr)
+return;
+
+```
+freeAVL(root->left);
+freeAVL(root->right);
+delete root;
+```
+
 }
 
 int main() {
-int choice;
+BSTNode* bstRoot = nullptr;
+AVLNode* avlRoot = nullptr;
 
 ```
-do {
-    cout << "\n=== Bank Account Management System ===\n";
-    cout << "1. Add Account\n";
-    cout << "2. Display Accounts\n";
-    cout << "3. Search Account\n";
-    cout << "4. Deposit Money\n";
-    cout << "5. Withdraw Money\n";
-    cout << "6. Delete Account\n";
-    cout << "7. Exit\n";
-    cout << "Enter your choice: ";
+int n, value;
 
-    if (!(cin >> choice)) {
-        cout << "Invalid menu choice.\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        continue;
+cout << "Enter number of values: ";
+
+if (!(cin >> n) || n < 0) {
+    cout << "Invalid number of values.\n";
+    return 1;
+}
+
+cout << "Enter " << n << " integer values:\n";
+
+for (int i = 0; i < n; i++) {
+    if (!(cin >> value)) {
+        cout << "Invalid input.\n";
+        freeBST(bstRoot);
+        freeAVL(avlRoot);
+        return 1;
     }
 
-    switch (choice) {
-        case 1:
-            addAccount();
-            break;
-        case 2:
-            displayAccounts();
-            break;
-        case 3:
-            findAccount();
-            break;
-        case 4:
-            depositMoney();
-            break;
-        case 5:
-            withdrawMoney();
-            break;
-        case 6:
-            deleteAccount();
-            break;
-        case 7:
-            cout << "Exiting program.\n";
-            break;
-        default:
-            cout << "Invalid choice. Try again.\n";
-    }
+    // Insert the same value into both trees
+    bstRoot = insertBST(bstRoot, value);
+    avlRoot = insertAVL(avlRoot, value);
+}
 
-} while (choice != 7);
+cout << "\nBST Inorder Traversal: ";
+inorderBST(bstRoot);
 
-freeList();
+cout << "\nAVL Inorder Traversal: ";
+inorderAVL(avlRoot);
+
+cout << "\nBST Height: " << heightBST(bstRoot);
+cout << "\nAVL Height: " << heightAVL(avlRoot);
+cout << "\n";
+
+freeBST(bstRoot);
+freeAVL(avlRoot);
+
 return 0;
 ```
 
