@@ -24,7 +24,7 @@ Operations:
 -Display
 -The Queue follows the FIFO principle.
 
-## 3. OBJECTIVES
+## 3.OBJECTIVES
 -To develop a Bank Account Management System using the C++ programming language.
 -To modify the original doubly linked list implementation by introducing Stack and Queue.
 -To implement Stack using dynamically allocated linked nodes.
@@ -35,7 +35,7 @@ Operations:
 -To release dynamically allocated memory after removing records and when the program terminates.
 -To study the differences between Stack and Queue through a banking-related application.
 
-## 5. ALGORITHM
+## 5.ALGORITHM
 Algorithm 1: Stack Using Dynamic Implementation
 1.Start.
 2.Initialize the top pointer to NULL.
@@ -77,7 +77,7 @@ Algorithm 2: Queue Using Dynamic Implementation
 10.Delete all remaining nodes.
 11.Stop.
 
-## 6
+## 6.
 
 ## 7.program
 
