@@ -41,367 +41,262 @@ To develop a Bank Account Management System using a doubly linked list that allo
 ## 6. Program
 #include <iostream>
 #include <string>
-#include <iomanip>
 #include <limits>
 using namespace std;
 
-struct Node {
+struct Node
+{
+    int accountNo;
     string name;
-    int accNo;
-    string type;
+    string accountType;
     double balance;
-    Node* next;
     Node* prev;
+    Node* next;
 };
 
 Node* head = NULL;
-Node* tail = NULL;
 
-// Search account by account number
-Node* searchAccount(int no) {
+void addAccount()
+{
+    Node* newNode = new Node;
+
+    cout << "Enter Account Number: ";
+    cin >> newNode->accountNo;
+
     Node* temp = head;
 
-    while (temp != NULL) {
-        if (temp->accNo == no)
-            return temp;
-
+    while (temp != NULL)
+    {
+        if (temp->accountNo == newNode->accountNo)
+        {
+            cout << "Account number already exists!\n";
+            delete newNode;
+            return;
+        }
         temp = temp->next;
     }
 
-    return NULL;
-}
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-// Create a new account
-void createAccount() {
-    Node* n = new Node;
-
-    cout << "Enter Account Holder Name: ";
-    cin >> ws;
-    getline(cin, n->name);
-
-    cout << "Enter Account Number: ";
-    cin >> n->accNo;
-
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid account number!\n";
-        delete n;
-        return;
-    }
-
-    if (searchAccount(n->accNo) != NULL) {
-        cout << "Account number already exists!\n";
-        delete n;
-        return;
-    }
+    cout << "Enter Customer Name: ";
+    getline(cin, newNode->name);
 
     cout << "Enter Account Type: ";
-    cin >> ws;
-    getline(cin, n->type);
+    getline(cin, newNode->accountType);
 
     cout << "Enter Initial Balance: ";
-    cin >> n->balance;
+    cin >> newNode->balance;
 
-    if (cin.fail() || n->balance < 0) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    if (newNode->balance < 0)
+    {
         cout << "Invalid balance!\n";
-        delete n;
+        delete newNode;
         return;
     }
 
-    n->next = NULL;
-    n->prev = tail;
+    newNode->prev = NULL;
+    newNode->next = NULL;
 
-    if (head == NULL) {
-        head = tail = n;
-    } else {
-        tail->next = n;
-        tail = n;
+    if (head == NULL)
+    {
+        head = newNode;
+    }
+    else
+    {
+        temp = head;
+
+        while (temp->next != NULL)
+            temp = temp->next;
+
+        temp->next = newNode;
+        newNode->prev = temp;
     }
 
-    cout << "Account created successfully!\n";
+    cout << "Account added successfully!\n";
 }
 
-// Deposit money
-void depositMoney() {
-    int no;
-    double amount;
-
-    cout << "Enter Account Number: ";
-    cin >> no;
-
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid account number!\n";
-        return;
-    }
-
-    Node* temp = searchAccount(no);
-
-    if (temp == NULL) {
-        cout << "Account not found!\n";
-        return;
-    }
-
-    cout << "Enter Deposit Amount: ";
-    cin >> amount;
-
-    if (cin.fail() || amount <= 0) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid amount!\n";
-        return;
-    }
-
-    temp->balance += amount;
-
-    cout << fixed << setprecision(2);
-    cout << "Deposit successful!\n";
-    cout << "Updated Balance: " << temp->balance << "\n";
-}
-
-// Withdraw money
-void withdrawMoney() {
-    int no;
-    double amount;
-
-    cout << "Enter Account Number: ";
-    cin >> no;
-
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid account number!\n";
-        return;
-    }
-
-    Node* temp = searchAccount(no);
-
-    if (temp == NULL) {
-        cout << "Account not found!\n";
-        return;
-    }
-
-    cout << "Enter Withdrawal Amount: ";
-    cin >> amount;
-
-    if (cin.fail() || amount <= 0) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid amount!\n";
-        return;
-    }
-
-    if (amount > temp->balance) {
-        cout << "Insufficient balance!\n";
-        return;
-    }
-
-    temp->balance -= amount;
-
-    cout << fixed << setprecision(2);
-    cout << "Withdrawal successful!\n";
-    cout << "Remaining Balance: " << temp->balance << "\n";
-}
-
-// Display all accounts in forward direction
-void displayAccounts() {
-    if (head == NULL) {
-        cout << "No accounts available!\n";
-        return;
-    }
-
+void displayAccounts()
+{
     Node* temp = head;
 
-    cout << "\n========== BANK ACCOUNTS ==========\n";
-    cout << fixed << setprecision(2);
+    if (temp == NULL)
+    {
+        cout << "No accounts available.\n";
+        return;
+    }
 
-    while (temp != NULL) {
-        cout << "\nAccount Holder: " << temp->name;
-        cout << "\nAccount Number: " << temp->accNo;
-        cout << "\nAccount Type: " << temp->type;
-        cout << "\nBalance: " << temp->balance;
-        cout << "\n-----------------------------------\n";
+    cout << "\n--- Bank Account Details ---\n";
+
+    while (temp != NULL)
+    {
+        cout << "\nAccount Number: " << temp->accountNo;
+        cout << "\nCustomer Name: " << temp->name;
+        cout << "\nAccount Type: " << temp->accountType;
+        cout << "\nBalance: " << temp->balance << "\n";
 
         temp = temp->next;
     }
 }
 
-// Search and display one account
-void displaySingleAccount() {
-    int no;
-
+void searchAccount()
+{
+    int number;
     cout << "Enter Account Number to Search: ";
-    cin >> no;
+    cin >> number;
 
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid account number!\n";
-        return;
+    Node* temp = head;
+
+    while (temp != NULL)
+    {
+        if (temp->accountNo == number)
+        {
+            cout << "Account Found!\n";
+            cout << "Name: " << temp->name << "\n";
+            cout << "Account Type: " << temp->accountType << "\n";
+            cout << "Balance: " << temp->balance << "\n";
+            return;
+        }
+
+        temp = temp->next;
     }
 
-    Node* temp = searchAccount(no);
-
-    if (temp == NULL) {
-        cout << "Account not found!\n";
-        return;
-    }
-
-    cout << fixed << setprecision(2);
-    cout << "\nAccount Found!\n";
-    cout << "Account Holder: " << temp->name << "\n";
-    cout << "Account Number: " << temp->accNo << "\n";
-    cout << "Account Type: " << temp->type << "\n";
-    cout << "Balance: " << temp->balance << "\n";
+    cout << "Account not found!\n";
 }
 
-// Delete an account
-void deleteAccount() {
-    int no;
-
+void deleteAccount()
+{
+    int number;
     cout << "Enter Account Number to Delete: ";
-    cin >> no;
+    cin >> number;
 
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid account number!\n";
-        return;
-    }
+    Node* temp = head;
 
-    Node* temp = searchAccount(no);
+    while (temp != NULL && temp->accountNo != number)
+        temp = temp->next;
 
-    if (temp == NULL) {
+    if (temp == NULL)
+    {
         cout << "Account not found!\n";
         return;
     }
 
-    // If the node is the first node
-    if (temp == head) {
-        head = temp->next;
-    } else {
+    if (temp->prev != NULL)
         temp->prev->next = temp->next;
-    }
+    else
+        head = temp->next;
 
-    // If the node is the last node
-    if (temp == tail) {
-        tail = temp->prev;
-    } else {
+    if (temp->next != NULL)
         temp->next->prev = temp->prev;
-    }
 
     delete temp;
 
     cout << "Account deleted successfully!\n";
 }
 
-// Display accounts in reverse direction
-void displayReverse() {
-    if (tail == NULL) {
-        cout << "No accounts available!\n";
-        return;
-    }
+void updateBalance()
+{
+    int number;
+    double amount;
 
-    Node* temp = tail;
+    cout << "Enter Account Number: ";
+    cin >> number;
 
-    cout << "\n===== ACCOUNTS IN REVERSE ORDER =====\n";
-
-    while (temp != NULL) {
-        cout << "\nAccount Holder: " << temp->name;
-        cout << "\nAccount Number: " << temp->accNo;
-        cout << "\nBalance: " << fixed << setprecision(2)
-             << temp->balance;
-        cout << "\n-------------------------------------\n";
-
-        temp = temp->prev;
-    }
-}
-
-// Free allocated memory
-void clearAccounts() {
     Node* temp = head;
 
-    while (temp != NULL) {
-        Node* nextNode = temp->next;
-        delete temp;
-        temp = nextNode;
+    while (temp != NULL)
+    {
+        if (temp->accountNo == number)
+        {
+            cout << "Enter New Balance: ";
+            cin >> amount;
+
+            if (amount < 0)
+            {
+                cout << "Invalid balance!\n";
+                return;
+            }
+
+            temp->balance = amount;
+            cout << "Balance updated successfully!\n";
+            return;
+        }
+
+        temp = temp->next;
     }
 
-    head = NULL;
-    tail = NULL;
+    cout << "Account not found!\n";
 }
 
-// Main function
-int main() {
+void freeMemory()
+{
+    while (head != NULL)
+    {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
+int main()
+{
     int choice;
 
-    do {
-        cout << "\n===== BANK ACCOUNT MANAGEMENT SYSTEM =====\n";
-        cout << "1. Create Account\n";
-        cout << "2. Deposit Money\n";
-        cout << "3. Withdraw Money\n";
-        cout << "4. Display All Accounts\n";
-        cout << "5. Search Account\n";
-        cout << "6. Delete Account\n";
-        cout << "7. Display Accounts in Reverse\n";
-        cout << "8. Exit\n";
-        cout << "Enter Your Choice: ";
+    do
+    {
+        cout << "\n===== BANK ACCOUNT MANAGEMENT =====\n";
+        cout << "1. Add Account\n";
+        cout << "2. Display Accounts\n";
+        cout << "3. Search Account\n";
+        cout << "4. Delete Account\n";
+        cout << "5. Update Balance\n";
+        cout << "6. Exit\n";
+        cout << "Enter your choice: ";
 
-        cin >> choice;
-
-        if (cin.fail()) {
+        if (!(cin >> choice))
+        {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid choice! Please enter a number.\n";
+            cout << "Invalid input!\n";
             continue;
         }
 
-        switch (choice) {
+        switch (choice)
+        {
             case 1:
-                createAccount();
+                addAccount();
                 break;
 
             case 2:
-                depositMoney();
-                break;
-
-            case 3:
-                withdrawMoney();
-                break;
-
-            case 4:
                 displayAccounts();
                 break;
 
-            case 5:
-                displaySingleAccount();
+            case 3:
+                searchAccount();
                 break;
 
-            case 6:
+            case 4:
                 deleteAccount();
                 break;
 
-            case 7:
-                displayReverse();
+            case 5:
+                updateBalance();
                 break;
 
-            case 8:
-                clearAccounts();
-                cout << "Thank you for using the Bank Management System!\n";
+            case 6:
+                freeMemory();
+                cout << "Program terminated.\n";
                 break;
 
             default:
-                cout << "Invalid choice! Please try again.\n";
+                cout << "Invalid choice!\n";
         }
 
-    } while (choice != 8);
+    } while (choice != 6);
 
     return 0;
 }
+    
+    
 ## 7. Conclusion
 
 The Bank Account Management System demonstrates the practical implementation of a doubly linked list in C++. It provides operations for managing account records, updating balances, searching for accounts, deleting records, and traversing the list in both directions. This project improves understanding of pointers, dynamic memory allocation, and linked list operations.
