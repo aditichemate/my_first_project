@@ -1,0 +1,13 @@
+## Algorithm for bank account management using stack and queue dynamic implementation
+
+1.Start.
+2.Initialize top = NULL.
+3.For the Push operation, create a new node.
+4.Store the banking operation in the new node.
+5.Link the new node to the current top.
+6.Update top to the new node.
+7.For the Pop operation, check whether the Stack is empty.
+8.If it is empty, display an underflow message.
+9.Otherwise, remove the top node and update the top pointer.
+10.Display the Stack when required.
+11.Stop.
