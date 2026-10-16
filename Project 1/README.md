@@ -1,44 +1,34 @@
-# Bank Account Management System Using Doubly Linked List
+## Problem statement
+To develop a Bank Account Management System using a doubly linked list in C++. The system stores and manages customer account details and performs operations such as insertion, deletion, searching, updating account balances, and displaying account information using dynamic memory allocation.
 
-## 1. Title
+## Objective 
+1. To implement a doubly linked list for managing bank account records.
+2. To perform insertion and deletion of account details.
+3. To search for a customer account using the account number.
+4. To update and display account information efficiently.
+5. To understand dynamic memory allocation in linked lists.
+6. To perform forward and backward traversal using previous and next pointers.
+7. To manage account records without using fixed-size arrays.
 
-Bank Account Management System Using Doubly Linked List in C++.
+## Approach
+1. Define a node structure containing the account number, customer name, account type, balance, and previous and next pointers.
+2. Initialize the head pointer to NULL.
+3. Create a function to insert new account details into the list.
+4. Traverse the list to display all account records.
+5. Search for an account using its account number.
+6. Delete the required account by updating the previous and next pointers.
+7. Update the balance of an existing account.
+8. Use dynamic memory allocation to create nodes and release memory when required.
 
-## 2. Problem Statement
+## Time Complexity
+1. Insertion at the Beginning: O(1)
+2. Insertion at the End: O(n)
+3. Deletion of an Account: O(n)
+4. Searching for an Account: O(n)
+5. Displaying All Accounts: O(n)
+6. Updating Account Balance: O(n)
 
-To develop a Bank Account Management System using a doubly linked list that allows users to create and delete accounts, deposit and withdraw money, check account balances, and display account records in forward and reverse order.
+Here, n represents the total number of bank account records in the doubly linked list.
 
-## 3. Objectives
-
-* To understand the implementation of a doubly linked list.
-* To store bank account details dynamically.
-* To perform insertion and deletion of account records.
-* To implement searching using account numbers.
-* To perform deposit and withdrawal operations.
-* To display account records in forward and reverse order.
-* To understand pointers and dynamic memory allocation in C++.
-
-## 4. Algorithm
-1. Start the program.
-2. Define a node containing account details and two pointers: next and prev.
-3. Initialize the head and tail pointers to NULL.
-4. Display the main menu.
-5. Accept the user's choice.
-6. If the choice is 1, create a new bank account and insert it into the list.
-7. If the choice is 2, search for an account and deposit money.
-8. If the choice is 3, search for an account and withdraw money after checking the balance.
-9. If the choice is 4, search for an account and display its balance.
-10. If the choice is 5, search for an account and delete it from the list.
-11. If the choice is 6, display all accounts from beginning to end.
-12. If the choice is 7, display all accounts from end to beginning.
-13. If the choice is 8, exit the program.
-14. Repeat the menu until the user chooses Exit.
-15. Stop the program.
-
-## 5. Flowchart
-<img width="1312" height="1199" alt="WhatsApp Image 2026-10-10 at 9 22 23 PM" src="https://github.com/user-attachments/assets/2e5dda47-eef9-43e2-85fb-d0868ce31b43" />
-
-## 6. Conclusion
-
-The Bank Account Management System demonstrates the practical implementation of a doubly linked list in C++. It provides operations for managing account records, updating balances, searching for accounts, deleting records, and traversing the list in both directions. This project improves understanding of pointers, dynamic memory allocation, and linked list operations.
-
+## Conclusion
+The Bank Account Management System was successfully implemented using a doubly linked list in C++. The system performs insertion, deletion, searching, updating, and displaying operations on bank account records. Dynamic memory allocation allows the system to manage records as required, while the previous and next pointers support traversal in both directions. This implementation helps in understanding the practical applications of doubly linked lists in data management.
