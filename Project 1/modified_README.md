@@ -17,7 +17,48 @@ To develop a Bank Account Management System using dynamically implemented stack 
 3. Use the push operation to add transactions and the pop operation to remove the latest transaction.
 4. Implement a queue using a linked list to manage account requests.
 5. Use the enqueue operation to add requests and the dequeue operation to process them in order.
-6. Provide display functions to show the records stored in the stack and queue.
+6. Provide display functions to show the records stored in the stack and queuw
+
+## sample output
+ BANK ACCOUNT MANAGEMENT SYSTEM 
+
+1. Add Account to Queue
+2. Process Account from Queue
+3. Push Account onto Stack
+4. Pop Account from Stack
+5. Display Queue
+6. Display Stack
+7. Exit
+
+Enter your choice: 1
+
+Enter Account Number: 101
+Enter Account Holder Name: Aditi
+
+Account added to queue successfully!
+
+Enter your choice: 1
+
+Enter Account Number: 102
+
+Enter Account Holder Name: Rahul
+
+Account added to queue successfully!
+
+Enter your choice: 5
+
+ Accounts in Queue 
+
+101 - Aditi
+102 - Rahul
+
+Enter your choice: 2
+
+Processed Account: 101 - Aditi
+
+Enter your choice: 7
+
+Exiting Bank Account Management System...
 
 ## Time complexity
 1. Stack Push: O(1)
