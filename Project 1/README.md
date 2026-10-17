@@ -19,6 +19,53 @@ To develop a Bank Account Management System using a doubly linked list in C++. T
 6. Delete the required account by updating the previous and next pointers.
 7. Update the balance of an existing account.
 8. Use dynamic memory allocation to create nodes and release memory when required.
+   
+
+## sample output
+===== BANK ACCOUNT MANAGEMENT SYSTEM =====
+
+1. Add Account
+2. Display All Accounts
+3. Search Account
+4. Update Account
+5. Delete Account
+6. Exit
+
+Enter your choice: 1
+
+Enter Account Number: 101
+Enter Account Holder Name: Aditi
+Enter Account Type: Savings
+Enter Balance: 5000
+
+Account added successfully!
+
+Enter your choice: 1
+
+Enter Account Number: 102
+Enter Account Holder Name: Rahul
+Enter Account Type: Current
+Enter Balance: 10000
+
+Account added successfully!
+
+Enter your choice: 2
+
+----- Bank Account Details -----
+
+Account Number: 101
+Account Holder Name: Aditi
+Account Type: Savings
+Balance: 5000
+
+Account Number: 102
+Account Holder Name: Rahul
+Account Type: Current
+Balance: 10000
+
+Enter your choice: 6
+
+Exiting Bank Account Management System...
 
 ## Time Complexity
 1. Insertion at the Beginning: O(1)
