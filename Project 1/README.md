@@ -22,7 +22,7 @@ To develop a Bank Account Management System using a doubly linked list in C++. T
    
 
 ## sample output
-===== BANK ACCOUNT MANAGEMENT SYSTEM =====
+BANK ACCOUNT MANAGEMENT SYSTEM 
 
 1. Add Account
 2. Display All Accounts
@@ -49,9 +49,8 @@ Enter Balance: 10000
 
 Account added successfully!
 
-Enter your choice: 2
-
------ Bank Account Details -----
+Enter your choice:  
+Bank Account Details 
 
 Account Number: 101
 Account Holder Name: Aditi
@@ -64,6 +63,46 @@ Account Type: Current
 Balance: 10000
 
 Enter your choice: 6
+
+Exiting Bank Account Management System...
+
+## sample outout
+BANK ACCOUNT MANAGEMENT SYSTEM 
+
+1. Add Account to Queue
+2. Process Account from Queue
+3. Push Account onto Stack
+4. Pop Account from Stack
+5. Display Queue
+6. Display Stack
+7. Exit
+
+Enter your choice: 1
+
+Enter Account Number: 101
+Enter Account Holder Name: Aditi
+
+Account added to queue successfully!
+
+Enter your choice: 1
+
+Enter Account Number: 102
+Enter Account Holder Name: Rahul
+
+Account added to queue successfully!
+
+Enter your choice: 5
+
+     Accounts in Queue 
+
+101 - Aditi
+102 - Rahul
+
+Enter your choice: 2
+
+Processed Account: 101 - Aditi
+
+Enter your choice: 7
 
 Exiting Bank Account Management System...
 
