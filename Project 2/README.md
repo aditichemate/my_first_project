@@ -42,5 +42,17 @@ Time Complexity: BST and AVL Height Comparison
 ## Output
 <img width="706" height="392" alt="image" src="https://github.com/user-attachments/assets/3db2da6f-16c1-4adf-9bdb-bc138961729d" />
 
+## sample output
+
+Enter the number of nodes: 7
+
+Enter the elements: 50 30 70 20 40 60 80
+
+BST created successfully
+
+Minimum element in BST: 20
+
+Maximum element in BST: 80
+
 ## conclusion
 The project demonstrates the construction and comparison of Binary Search Trees and AVL trees using C++. It shows how insertion order affects the height of a BST and how AVL rotations maintain a balanced tree. By counting search comparisons and testing ascending, descending, and random insertion orders, the program helps evaluate the effect of tree balancing on search efficiency. Thus, AVL trees provide more predictable search performance than an ordinary BST, particularly when the BST becomes highly unbalanced.
