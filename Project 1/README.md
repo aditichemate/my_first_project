@@ -22,7 +22,7 @@ To develop a Bank Account Management System using a doubly linked list in C++. T
    
 
 ## sample output
-BANK ACCOUNT MANAGEMENT SYSTEM 
+ BANK ACCOUNT MANAGEMENT SYSTEM 
 
 1. Add Account
 2. Display All Accounts
@@ -49,8 +49,9 @@ Enter Balance: 10000
 
 Account added successfully!
 
-Enter your choice:  
-Bank Account Details 
+Enter your choice: 2
+
+ Bank Account Details 
 
 Account Number: 101
 Account Holder Name: Aditi
@@ -65,56 +66,6 @@ Balance: 10000
 Enter your choice: 6
 
 Exiting Bank Account Management System...
-
-## sample outout
-BANK ACCOUNT MANAGEMENT SYSTEM 
-
-1. Add Account to Queue
-2. Process Account from Queue
-3. Push Account onto Stack
-4. Pop Account from Stack
-5. Display Queue
-6. Display Stack
-7. Exit
-
-Enter your choice: 1
-
-Enter Account Number: 101
-Enter Account Holder Name: Aditi
-
-Account added to queue successfully!
-
-Enter your choice: 1
-
-Enter Account Number: 102
-Enter Account Holder Name: Rahul
-
-Account added to queue successfully!
-
-Enter your choice: 5
-
-     Accounts in Queue 
-
-101 - Aditi
-102 - Rahul
-
-Enter your choice: 2
-
-Processed Account: 101 - Aditi
-
-Enter your choice: 7
-
-Exiting Bank Account Management System...
-
-## Time Complexity
-1. Insertion at the Beginning: O(1)
-2. Insertion at the End: O(n)
-3. Deletion of an Account: O(n)
-4. Searching for an Account: O(n)
-5. Displaying All Accounts: O(n)
-6. Updating Account Balance: O(n)
-
-Here, n represents the total number of bank account records in the doubly linked list.
 
 ## Conclusion
 The Bank Account Management System was successfully implemented using a doubly linked list in C++. The system performs insertion, deletion, searching, updating, and displaying operations on bank account records. Dynamic memory allocation allows the system to manage records as required, while the previous and next pointers support traversal in both directions. This implementation helps in understanding the practical applications of doubly linked lists in data management.
