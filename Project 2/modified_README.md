@@ -36,6 +36,22 @@ To implement BST and AVL trees using C++ and compare their heights. Modify the p
 
 9. Stop.
 
+## sample output
+
+Enter the number of nodes: 7
+Enter the elements: 50 30 70 20 40 60 80
+
+BST created successfully.
+
+Finding Minimum:
+Path followed: 50 -> 30 -> 20
+Minimum element: 20
+Comparisons required: 2
+
+Finding Maximum:
+Path followed: 50 -> 70 -> 80
+Maximum element: 80
+Comparisons required: 2
 ## Time Complexity
 
 - BST Insertion: Average case – O(log n), Worst case – O(n).
